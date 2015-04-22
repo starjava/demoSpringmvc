@@ -1,0 +1,38 @@
+<!-- 存储过程  
+        CREATE PROCEDURE proc_transno
+(
+    p_trnxcode char(2),
+    p_reqtype char(1),
+    p_ischangemoney char(1),
+    out p_transno char(20)
+)
+-->  
+<selectid="callTransNo"statementType="CALLABLE">
+{call  
+          proc_transno(#{
+             p_trnxcode,  
+                       mode=IN,  
+                       javaType=java.lang.String,  
+                       jdbcType=VARCHAR
+                       },
+                       #{
+                       p_reqtype,  
+                       mode=IN,  
+                       javaType=java.lang.String,  
+                       jdbcType=VARCHAR
+                       },
+                       #{
+                       p_ischangemoney,  
+                       mode=IN,  
+                       javaType=java.lang.String,  
+                       jdbcType=VARCHAR
+                       },
+                       #{
+                       p_transno,  
+                       mode=OUT,  
+                       javaType=java.lang.String,  
+                       jdbcType=VARCHAR,  
+                       resultType=java.lang.String
+                       })
+         }  
+</select>

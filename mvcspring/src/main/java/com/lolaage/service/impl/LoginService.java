@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.PageHelper;
 import com.lolaage.mapper.ILoginMapper;
 import com.lolaage.service.ILoginService;
 
@@ -24,7 +25,7 @@ public class LoginService implements ILoginService {
 	 */
 	@Override
 	public boolean Login(String username, String password) {
-
+		PageHelper.startPage(1, 10);
 		return null == logindao.Login(username, password) ? false : true;
 	}
 

@@ -7,8 +7,10 @@ package com.lolaage.common;
 public interface Consts {
 
 	/**
-	 * #你的uc api接口地址  
+	 * http://blog.csdn.net/hambition/article/details/22578729
+	 * http://blog.csdn.net/hambition/article/details/22578939
+	 * 举例  
 	 */
-	public static final String UC_API = "http://192.168.1.109/bbs/uc_server ";
+	public static final String UC_API = "";
 	
 }
