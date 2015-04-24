@@ -1,38 +1,55 @@
-<!-- 存储过程  
-        CREATE PROCEDURE proc_transno
-(
-    p_trnxcode char(2),
-    p_reqtype char(1),
-    p_ischangemoney char(1),
-    out p_transno char(20)
+ CREATE TABLE `t_user` (
+	`f_id` INT(11) NOT NULL AUTO_INCREMENT,
+	`f_name` VARCHAR(20) NULL DEFAULT NULL,
+	`sex` CHAR(2) NULL DEFAULT NULL,
+	PRIMARY KEY (`f_id`)
 )
--->  
-<selectid="callTransNo"statementType="CALLABLE">
-{call  
-          proc_transno(#{
-             p_trnxcode,  
-                       mode=IN,  
-                       javaType=java.lang.String,  
-                       jdbcType=VARCHAR
-                       },
-                       #{
-                       p_reqtype,  
-                       mode=IN,  
-                       javaType=java.lang.String,  
-                       jdbcType=VARCHAR
-                       },
-                       #{
-                       p_ischangemoney,  
-                       mode=IN,  
-                       javaType=java.lang.String,  
-                       jdbcType=VARCHAR
-                       },
-                       #{
-                       p_transno,  
-                       mode=OUT,  
-                       javaType=java.lang.String,  
-                       jdbcType=VARCHAR,  
-                       resultType=java.lang.String
-                       })
-         }  
-</select>
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+ROW_FORMAT=DEFAULT
+AUTO_INCREMENT=1
+INSERT INTO `t_user` (`f_id`, `f_name`, `sex`) VALUES (1, 'A', '男');
+INSERT INTO `t_user` (`f_id`, `f_name`, `sex`) VALUES (2, 'B', '女');
+INSERT INTO `t_user` (`f_id`, `f_name`, `sex`) VALUES (3, 'C', '男');
+INSERT INTO `t_user` (`f_id`, `f_name`, `sex`) VALUES (4, 'D', '女');
+INSERT INTO `t_user` (`f_id`, `f_name`, `sex`) VALUES (5, 'E', '女');
+INSERT INTO `t_user` (`f_id`, `f_name`, `sex`) VALUES (6, 'F', '女');
+ DELIMITER $
+CREATE  PROCEDURE `PRO_GET_USER_COUNT`(IN `sex_id` INT, OUT `user_count` INT)
+	LANGUAGE SQL
+	NOT DETERMINISTIC
+	CONTAINS SQL
+	SQL SECURITY DEFINER
+	COMMENT ''
+BEGIN
+IF sex_id=0 then 
+select count(f_id)from t_user where sex='女'into user_count;
+else
+select count(f_id)from t_user where sex='男'into user_count;
+END if;
+end
+$
+ DELIMITER $
+ CREATE DEFINER=`root`@`localhost` PROCEDURE `PRO_GET_USER_INFO`()
+	LANGUAGE SQL
+	NOT DETERMINISTIC
+	CONTAINS SQL
+	SQL SECURITY DEFINER
+	COMMENT ''
+BEGIN
+select *from t_user where sex='女';
+
+end
+ $
+
+
+
+
+
+
+
+
+
+
+
+
