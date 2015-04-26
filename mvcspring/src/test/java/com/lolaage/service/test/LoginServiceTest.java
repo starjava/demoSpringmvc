@@ -2,6 +2,7 @@ package com.lolaage.service.test;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -32,12 +33,11 @@ public class LoginServiceTest {
 	 */
 	@Test
 	public void test_Pro(){
-//		Map<String, Integer> paramMaps = new HashMap<String, Integer>();
-//		paramMaps.put("userId", 0);
-//		paramMaps.put("count", -1);
-//		Integer count=-1;
-//		logindao.getCount(paramMaps); 
-//		System.out.println(paramMaps.get("count"));
+		Map<String, Integer> paramMaps = new HashMap<String, Integer>();
+		paramMaps.put("userId", 0);
+		paramMaps.put("count", -1);
+		logindao.getCount(paramMaps); 
+		System.out.println("返回单个参数"+paramMaps.get("count"));
 		
 	}
 	/**
@@ -45,7 +45,22 @@ public class LoginServiceTest {
 	 */
 	@Test
 	public void test_getUserInfos(){
-		System.out.println(logindao.getUserInfos());
+		System.out.println("返回1个结果集,多参数且多行-"+logindao.getUserInfos());
+	}
+	@Test
+	public void test_getUserMoreCounts(){
+		Map<String, Integer> paramMaps = new HashMap<String, Integer>();
+		paramMaps.put("userId", 0);
+		paramMaps.put("boy_count", -1);
+		paramMaps.put("girl_count", -1);
+		logindao.getUserMoreCounts(paramMaps);
+		System.out.println("返回多结果集：size="+paramMaps.size()+"boy_count="
+		+paramMaps.get("boy_count")+" girl_count="+paramMaps.get("girl_count"));
+	}
+	@Test
+	public void test_getUserMoreUsers(){
+		List<List<?>> results=logindao.getUserMoreUsers();
+		System.out.println("返回多结果集--"+results);
 	}
 	
 }

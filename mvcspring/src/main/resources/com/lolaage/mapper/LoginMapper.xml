@@ -14,9 +14,29 @@
 	<![CDATA[
 	{call PRO_GET_USER_INFO()} ]]>
 	</select>
-	
-	
-	
+	<select id="getUserMoreCounts" statementType="CALLABLE">
+	<![CDATA[
+	{call PRO_GET_USER_MORE_COUNT(#{paramMap.userId,mode=IN,jdbcType=INTEGER},
+	#{paramMap.boy_count,mode=OUT,jdbcType=INTEGER},
+	#{paramMap.girl_count,mode=OUT,jdbcType=INTEGER})} ]]>
+	</select>
+	<!-- 返回多个结果集 -->
+	<resultMap type="java.util.HashMap" id="boyMap">
+	<result column="f_id"  property="fid" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+	<result column="f_name" property="fname" jdbcType="VARCHAR" javaType="java.lang.String"/>
+	<result column="sex"  property="fsex" jdbcType="VARCHAR" javaType="java.lang.String"/>
+	</resultMap>
+	<resultMap type="java.util.HashMap" id="girlMap">
+	<result column="f_id"  property="fid" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+	<result column="f_name" property="fname" jdbcType="VARCHAR" javaType="java.lang.String"/>
+	<result column="sex"  property="fsex" jdbcType="VARCHAR" javaType="java.lang.String"/>
+	</resultMap>
+	<select id="getUserMoreUsers" statementType="CALLABLE"
+	 resultMap="boyMap,girlMap">
+	<![CDATA[
+	{call PRO_GET_USER_MORE_USERS()} ]]>
+	</select>
+	<!-- 返回多个结果集 -->
 	<!-- 其他写法 -->
 	<parameterMap type="java.util.Map" id="paramMap">
 	<parameter property="userId" mode="IN" jdbcType="INTEGER"/>

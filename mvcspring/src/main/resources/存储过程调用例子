@@ -38,12 +38,37 @@ $
 	COMMENT ''
 BEGIN
 select *from t_user where sex='女';
-
 end
  $
+ DELIMITER $
+CREATE PROCEDURE `PRO_GET_USER_MORE_COUNT`(IN `sex_id` INT, OUT `boy_count` INT,OUT girl_count INT)
+	LANGUAGE SQL
+	NOT DETERMINISTIC
+	CONTAINS SQL
+	SQL SECURITY DEFINER
+	COMMENT '2个OUT参数，返回多结果集'
+BEGIN
+set sex_id=0 ;
+select count(f_id)from t_user where sex='女'into boy_count;
+select count(f_id)from t_user where sex='男'into girl_count;
+end
+$
+call PRO_GET_USER_MORE_COUNT(0,@boy,@girl);
+select @boy,@girl;
 
-
-
+ DELIMITER $
+CREATE PROCEDURE `PRO_GET_USER_MORE_USERS`()
+	LANGUAGE SQL
+	NOT DETERMINISTIC
+	CONTAINS SQL
+	SQL SECURITY DEFINER
+	COMMENT '返回多结果集'
+BEGIN
+select *from t_user where sex='女';
+select *from t_user where sex='男';
+end
+$
+call PRO_GET_USER_MORE_USERS();
 
 
 
