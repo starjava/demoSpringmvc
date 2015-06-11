@@ -7,8 +7,8 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>mvcspring Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-	<properties> 
-	<spring.version>3.2.13.RELEASE</spring.version>
+	<properties>
+		<spring.version>3.2.13.RELEASE</spring.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -136,7 +136,7 @@
 			<artifactId>freemarker</artifactId>
 			<version>2.3.22</version>
 		</dependency>
-		<!-- mysql分页插件 项目地址：http://git.oschina.net/free/Mybatis_PageHelper-->
+		<!-- mysql分页插件 项目地址：http://git.oschina.net/free/Mybatis_PageHelper -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper</artifactId>
@@ -193,7 +193,18 @@
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.10</version>
 				<configuration>
-					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<webAppConfig>
+						<contextPath>/${project.artifactId}</contextPath>
+						<tempDirectory>${project.build.directory}/work</tempDirectory>
+						<defaultsDescriptor>src/test/resources/webdefault.xml</defaultsDescriptor>
+					</webAppConfig>
+					<connectors>
+						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+							<port>80</port>
+						</connector>
+					</connectors>
+					<reload>automatic</reload>
+					<scanIntervalSeconds>5</scanIntervalSeconds>
 					<stopKey>foo</stopKey>
 					<stopPort>9999</stopPort>
 					<webDefaultXml>src/test/resources/webdefault.xml</webDefaultXml>
@@ -250,7 +261,12 @@
 			</properties>
 		</profile>
 	</profiles>
-	<!-- <distributionManagement> <repository> <id>deploymentRepo</id> <name>Uploadable 
-		Nexus Repo</name> <url>http://192.168.2.19:8081/nexus/content/repositories/snapshots/</url> 
-		</repository> </distributionManagement> -->
+	<distributionManagement>
+		<repository>
+			<id>deploymentRepo</id>
+			<name>Uploadable Nexus Repo</name>
+			<url>http://192.168.2.19:8081/nexus/content/repositories/snapshots/</url>
+		</repository>
+	</distributionManagement>
+	<!--阿里http://mvnrepo.code.taobao.org/nexus/content/repositories/snapshots/ -->
 </project>
