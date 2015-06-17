@@ -2,6 +2,7 @@ package com.lolaage.controller;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import com.lolaage.service.ILoginService;
 @Controller
 public class LoginController
 {
+    public static Logger log = Logger.getLogger(LoginController.class);
     
     @Resource
     private ILoginService loginService;
@@ -20,9 +22,12 @@ public class LoginController
     public String Login(String username, String password, ModelMap map)
     {
         
-        if (loginService.Login(username, password))
+        // if (loginService.Login(username, password))
+        if (true)
         {
-            System.out.println("success.." + username + "-password:" + password);
+            log.info("success.." + username + "-password:" + password);
+            log.debug("debug msg");
+            log.error("error msg");
             map.put("u", username);
             map.put("p", password);
             return "/pages/main";
@@ -30,7 +35,7 @@ public class LoginController
         else
         {
             map.put("msg", "帐号或密码错误!!!");
-            System.out.println("back login");
+            log.info("msg--帐号或密码错误!!!");
             return "/pages/Login/login";
         }
         //

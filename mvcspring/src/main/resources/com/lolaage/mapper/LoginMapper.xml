@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lolaage.mapper.ILoginMapper">
-	<select id="Login" resultType="java.lang.Boolean">
+
+<insert id="addStudent">
+	insert into t_student (f_name)values(#{name});
+	</insert>
+	<update id="updateStudent">
+	update t_student set f_name=#{name} where id=${id}
+	</update>
+	<!-- <select id="Login" resultType="java.lang.Boolean">
 	select *from t_student where f_name=#{uname} and f_subject=#{password}
 	</select>
+	<insert id="addStudent">
+	
+	</insert>
 	<select id="getCount"  statementType="CALLABLE" >
 	<![CDATA[
 	{call PRO_GET_USER_COUNT(#{paramMap.userId,mode=IN,jdbcType=INTEGER},
@@ -20,7 +30,7 @@
 	#{paramMap.boy_count,mode=OUT,jdbcType=INTEGER},
 	#{paramMap.girl_count,mode=OUT,jdbcType=INTEGER})} ]]>
 	</select>
-	<!-- 返回多个结果集 -->
+	返回多个结果集
 	<resultMap type="java.util.HashMap" id="boyMap">
 	<result column="f_id"  property="fid" jdbcType="INTEGER" javaType="java.lang.Integer"/>
 	<result column="f_name" property="fname" jdbcType="VARCHAR" javaType="java.lang.String"/>
@@ -36,8 +46,8 @@
 	<![CDATA[
 	{call PRO_GET_USER_MORE_USERS()} ]]>
 	</select>
-	<!-- 返回多个结果集 -->
-	<!-- 其他写法 -->
+	返回多个结果集
+	其他写法
 	<parameterMap type="java.util.Map" id="paramMap">
 	<parameter property="userId" mode="IN" jdbcType="INTEGER"/>
 	<parameter property="count" mode="OUT" jdbcType="INTEGER" javaType="int"/>
@@ -45,5 +55,5 @@
 	<select id="PRO_DEMO1" parameterMap="paramMap" statementType="CALLABLE" >
 	<![CDATA[
 	{call PRO_GET_USER_COUNT(?,?)} ]]>
-	</select>
+	</select> -->
 </mapper>
