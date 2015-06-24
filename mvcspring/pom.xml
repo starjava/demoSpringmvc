@@ -8,7 +8,26 @@
 	<name>mvcspring Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
+		<port>80</port>
+		<context.path>/${project.artifactId}</context.path>
 		<spring.version>3.2.13.RELEASE</spring.version>
+		<mybatis.spring.version>1.2.2</mybatis.spring.version>
+		<mysql.connector.java>5.1.28</mysql.connector.java>
+		<log4j.version>1.2.17</log4j.version>
+		<junit.version>4.11</junit.version>
+		<hamcrest.version>1.3</hamcrest.version>
+		<aspectj.weaver.version>1.7.3</aspectj.weaver.version>
+		<cglib.version>3.1</cglib.version>
+		<jackson.mapper.asl.version>1.9.11</jackson.mapper.asl.version>
+		<commons.fileupload>1.3</commons.fileupload>
+		<jstl.version>1.2</jstl.version>
+		<druid.version>1.0.1</druid.version>
+		<servlet.api.version>3.0-alpha-1</servlet.api.version>
+		<jsp.api.version>2.1</jsp.api.version>
+		<freemarker.version>2.3.22</freemarker.version>
+		<pagehelper.version>3.7.0</pagehelper.version>
+		<encoding.version>UTF-8</encoding.version>
+		<jdk.version>1.7</jdk.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -65,82 +84,81 @@
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>
-			<version>1.2.2</version>
+			<version>${mybatis.spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.28</version>
+			<version>${mysql.connector.java}</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
+			<version>${log4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.11</version>
+			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.hamcrest</groupId>
 			<artifactId>hamcrest-all</artifactId>
-			<version>1.3</version>
+			<version>${hamcrest.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
-			<version>1.7.3</version>
+			<version>${aspectj.weaver.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>cglib</groupId>
 			<artifactId>cglib</artifactId>
-			<version>3.1</version>
+			<version>${cglib.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.11</version>
+			<version>${jackson.mapper.asl.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
-			<version>1.3</version>
+			<version>${commons.fileupload}</version>
 		</dependency>
-
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-			<version>1.2</version>
+			<version>${jstl.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
-			<version>1.0.1</version>
+			<version>${druid.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
-			<version>3.0-alpha-1</version>
+			<version>${servlet.api.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
+			<version>${jsp.api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
-			<version>2.3.22</version>
+			<version>${freemarker.version}</version>
 		</dependency>
 		<!-- mysql分页插件 项目地址：http://git.oschina.net/free/Mybatis_PageHelper -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper</artifactId>
-			<version>3.7.0</version>
+			<version>${pagehelper.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -157,7 +175,7 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<version>2.5</version>
 				<configuration>
-					<encoding>UTF-8</encoding>
+					<encoding>${encoding.version}</encoding>
 				</configuration>
 			</plugin>
 
@@ -171,9 +189,9 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5</version>
 				<configuration>
-					<encoding>UTF-8</encoding>
-					<source>1.6</source>
-					<target>1.6</target>
+					<encoding>${encoding.version}</encoding>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
 
@@ -194,13 +212,13 @@
 				<version>6.1.10</version>
 				<configuration>
 					<webAppConfig>
-						<contextPath>/${project.artifactId}</contextPath>
+						<contextPath>${context.path}</contextPath>
 						<tempDirectory>${project.build.directory}/work</tempDirectory>
 						<defaultsDescriptor>src/test/resources/webdefault.xml</defaultsDescriptor>
 					</webAppConfig>
 					<connectors>
 						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-							<port>80</port>
+							<port>${port}</port>
 						</connector>
 					</connectors>
 					<reload>automatic</reload>
@@ -233,13 +251,11 @@
 			<!-- 集成findBugs <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>findbugs-maven-plugin</artifactId> 
 				<version>2.3.1</version> </plugin> -->
 		</plugins>
-
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
 			</resource>
-
 		</resources>
 	</build>
 	<profiles>
@@ -261,12 +277,18 @@
 			</properties>
 		</profile>
 	</profiles>
+	<!-- 配置远程发布到私服，mvn deploy -->
 	<distributionManagement>
 		<repository>
-			<id>deploymentRepo</id>
-			<name>Uploadable Nexus Repo</name>
-			<url>http://192.168.2.19:8081/nexus/content/repositories/snapshots/</url>
+			<id>nexus-releases</id>
+			<name>Nexus Release Repository</name>
+			<url>http://192.168.2.104:8081/nexus/content/repositories/releases</url>
 		</repository>
+		<snapshotRepository>
+			<id>nexus-snapshots</id>
+			<name>Nexus Snapshot Repository</name>
+			<url>http://192.168.2.104:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
 	</distributionManagement>
 	<!--阿里http://mvnrepo.code.taobao.org/nexus/content/repositories/snapshots/ -->
 </project>
