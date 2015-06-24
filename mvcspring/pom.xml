@@ -160,6 +160,27 @@
 			<artifactId>pagehelper</artifactId>
 			<version>${pagehelper.version}</version>
 		</dependency>
+		<!-- 添加mysql缓存ehcache需要的jar -->
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>2.6.11</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-ehcache</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.12</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.7.12</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>mvcspring</finalName>
@@ -265,15 +286,15 @@
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<jdbc_url>jdbc:mysql://127.0.0.1:3306/test</jdbc_url>
-				<jdbc_user>root</jdbc_user>
-				<jdbc_password>123456</jdbc_password>
+				<cfg_jdbc_url>jdbc:mysql://127.0.0.1:3306/test</cfg_jdbc_url>
+				<cfg_jdbc_user>root</cfg_jdbc_user>
+				<cfg_jdbc_password>123456</cfg_jdbc_password>
 			</properties>
 		</profile>
 		<profile>
 			<id>pretest</id> <!-- 测试发布环境 -->
 			<properties>
-				<upload.path>XXXX</upload.path>
+				<cfg_upload.path>XXXX</cfg_upload.path>
 			</properties>
 		</profile>
 	</profiles>

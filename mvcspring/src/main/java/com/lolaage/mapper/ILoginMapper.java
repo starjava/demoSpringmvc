@@ -1,5 +1,8 @@
 package com.lolaage.mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface ILoginMapper
@@ -32,5 +35,16 @@ public interface ILoginMapper
     public void addStudent(@Param("name") String name);
     
     public void updateStudent(@Param("id") Integer id, @Param("name") String name);
+    
+    /**
+     * 
+     *
+     * @Title: getStudent
+     * @Description: 查询所有student数据
+     * @return
+     * @return List<Map<String,Object>> 返回类型
+     * @throws
+     */
+    public List<Map<String, Object>> getStudent();
     
 }

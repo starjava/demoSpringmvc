@@ -108,4 +108,9 @@
 	<session-config>
 		<session-timeout>15</session-timeout>
 	</session-config>
+	<!-- 表示当系统发生异常错误的时候，页面跳转到error.html页面。 -->
+	<error-page>
+       <exception-type>java.lang.Exception</exception-type>
+       <location>/pages/error.jsp</location>
+    </error-page>
 </web-app>

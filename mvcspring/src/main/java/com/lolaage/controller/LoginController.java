@@ -21,9 +21,8 @@ public class LoginController
     @RequestMapping("/login")
     public String Login(String username, String password, ModelMap map)
     {
-        
-        // if (loginService.Login(username, password))
-        if (true)
+        System.out.println("test cache--" + loginService.getStudent());
+        if (loginService.Login(username, password))
         {
             log.info("success.." + username + "-password:" + password);
             log.debug("debug msg");
@@ -38,7 +37,6 @@ public class LoginController
             log.info("msg--帐号或密码错误!!!");
             return "/pages/Login/login";
         }
-        //
         
     }
     

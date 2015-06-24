@@ -1,5 +1,8 @@
 package com.lolaage.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -28,6 +31,13 @@ public class LoginService implements ILoginService
         PageHelper.startPage(1, 10);
         // return null == logindao.Login(username, password) ? false : true;
         return true;
+    }
+    
+    @Override
+    public List<Map<String, Object>> getStudent()
+    {
+        
+        return logindao.getStudent();
     }
     
 }
