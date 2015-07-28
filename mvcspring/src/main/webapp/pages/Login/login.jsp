@@ -5,32 +5,36 @@
 <script type="text/javascript"></script>
 <head>
 <title>Login Pages</title>
-<link href="${pageContext.request.contextPath}/css/login.css"
+<link href="<%=basePath %>/css/login.css"
 	rel="stylesheet" type="text/css" />
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/js/login/login.js"></script>
+	src="<%=basePath %>/js/login/login.js"></script>
 </head>
 <body>
-
 	<form
-		action="${pageContext.request.contextPath}/loginController/login.html"
+		action="<%=basePath %>/loginController/login.html"
 		method="post">
 		<table align="center">
 			<tr align="center">
 				<td>用户名:</td>
-				<td><input type="text" name="username" value="" /></td>
+				<td><input type="text" name="username" value="" />
+				<form:errors path="username"></form:errors>
+				</td>
+				
 			</tr>
 			<tr>
 				<td>密&emsp;码:</td>
 				<td><input type="password" name="password"
-					onpaste="return false" /></td>
+					onpaste="return false" />
+				<form:errors path="password"></form:errors>	
+					</td>
 			</tr>
 			<tr>
 				<td>验证码:</td>
 				<td><input type="text" name="vcodetxt" maxlength="6"
 					style="width: 60px;" /> &emsp; <a href="#" id="vcodeurl"> <img
 						id="vcode" border="0" height="20px" 
-						src="${pageContext.request.contextPath}/pages/Login/image.jsp" /></a>
+						src="<%=basePath %>/pages/Login/image.jsp" /></a>
 				</td>
 			</tr>
 			<tr>

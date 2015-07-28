@@ -28,7 +28,9 @@ mvcspring_war 编译打包
 clean compile war:war
 
 2.框架简单介绍
-
+使用spring+springmvc+mybatis+freemarker(模版引擎)+ehcache(缓存)
++guava(工具类)+druid(数据源)+pagehelper(分页插件)+hibernate-validator(后台验证框架)
++
 1.文件夹介绍
   src/test/java文件夹 保存测试案例的java类
   src/test/resource文件夹 保存测试需要的配置文件

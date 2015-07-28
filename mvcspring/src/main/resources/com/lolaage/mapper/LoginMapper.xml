@@ -3,7 +3,9 @@
 <mapper namespace="com.lolaage.mapper.ILoginMapper">
 	<cache type="org.mybatis.caches.ehcache.LoggingEhcache" />
 	<insert id="addStudent">
+	<![CDATA[   
 		insert into t_student (f_name)values(#{name});
+		]]>
 	</insert>
 	<update id="updateStudent">
 		update t_student set f_name=#{name} where id=${id}

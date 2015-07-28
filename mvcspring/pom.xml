@@ -8,9 +8,9 @@
 	<name>mvcspring Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<properties>
-		<port>80</port>
+		<port>8080</port>
 		<context.path>/${project.artifactId}</context.path>
-		<spring.version>3.2.13.RELEASE</spring.version>
+		<spring.version>4.1.7.RELEASE</spring.version>
 		<mybatis.spring.version>1.2.2</mybatis.spring.version>
 		<mysql.connector.java>5.1.28</mysql.connector.java>
 		<log4j.version>1.2.17</log4j.version>
@@ -18,18 +18,44 @@
 		<hamcrest.version>1.3</hamcrest.version>
 		<aspectj.weaver.version>1.7.3</aspectj.weaver.version>
 		<cglib.version>3.1</cglib.version>
-		<jackson.mapper.asl.version>1.9.11</jackson.mapper.asl.version>
+		<jackson.version>2.6.0</jackson.version>
 		<commons.fileupload>1.3</commons.fileupload>
 		<jstl.version>1.2</jstl.version>
-		<druid.version>1.0.1</druid.version>
+		<druid.version>1.0.15</druid.version>
 		<servlet.api.version>3.0-alpha-1</servlet.api.version>
 		<jsp.api.version>2.1</jsp.api.version>
 		<freemarker.version>2.3.22</freemarker.version>
 		<pagehelper.version>3.7.0</pagehelper.version>
 		<encoding.version>UTF-8</encoding.version>
 		<jdk.version>1.7</jdk.version>
+		<commons.net.version>20030805.205232</commons.net.version>
+		<commons.httpclient.version>3.1</commons.httpclient.version>
+		<commons.lang.version>2.6</commons.lang.version>
+		<ehcache.core.version>2.6.11</ehcache.core.version>
+		<mybatis.ehcache.version>1.0.0</mybatis.ehcache.version>
+		<org.slf4j.version>1.7.12</org.slf4j.version>
+		<mybatis.version>3.2.3</mybatis.version>
+		<guava.version>17.0</guava.version>
+		<validator.version>5.2.0.Final</validator.version>
+		<el.version>2.2.4</el.version>
+		<json.lib.version>2.3</json.lib.version>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${validator.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>${commons.lang.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>${commons.httpclient.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -79,7 +105,7 @@
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis</artifactId>
-			<version>3.2.3</version>
+			<version>${mybatis.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -119,10 +145,21 @@
 			<version>${cglib.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>${jackson.mapper.asl.version}</version>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency> 
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
@@ -142,6 +179,11 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>${servlet.api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
@@ -164,22 +206,28 @@
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache-core</artifactId>
-			<version>2.6.11</version>
+			<version>${ehcache.core.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-ehcache</artifactId>
-			<version>1.0.0</version>
+			<version>${mybatis.ehcache.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.7.12</version>
+			<version>${org.slf4j.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.12</version>
+			<version>${org.slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>javax.el-api</artifactId>
+			<version>${el.version}</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 	<build>
@@ -199,13 +247,11 @@
 					<encoding>${encoding.version}</encoding>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.3</version>
 			</plugin>
-
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.5</version>
@@ -215,7 +261,6 @@
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-eclipse-plugin</artifactId>
@@ -281,20 +326,40 @@
 	</build>
 	<profiles>
 		<profile>
-			<id>development</id> <!-- 开发环境 -->
+			<id>development</id> <!-- 开发环境配置 -->
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<cfg_jdbc_url>jdbc:mysql://127.0.0.1:3306/test</cfg_jdbc_url>
-				<cfg_jdbc_user>root</cfg_jdbc_user>
-				<cfg_jdbc_password>123456</cfg_jdbc_password>
+				<!-- jdbc配置信息 -->
+				<jdbc_url>jdbc:mysql://127.0.0.1:3306/test</jdbc_url>
+				<jdbc_user>root</jdbc_user>
+				<jdbc_password>123456</jdbc_password>
+				<jdbc_initialSize>100</jdbc_initialSize>
+				<jdbc_minIdle>100</jdbc_minIdle>
+				<jdbc_maxActive>1000</jdbc_maxActive>
+				<jdbc_maxWait>10000</jdbc_maxWait>
+				<jdbc_timeBetweenEvictionRunsMillis>60000</jdbc_timeBetweenEvictionRunsMillis>
+				<jdbc_minEvictableIdleTimeMillis>300000</jdbc_minEvictableIdleTimeMillis>
+				<jdbc_filters>stat,log4j,wall</jdbc_filters>
+				<!-- jdbc配置信息 -->
 			</properties>
 		</profile>
 		<profile>
-			<id>pretest</id> <!-- 测试发布环境 -->
+			<id>produce</id> <!-- 生产环境配置 -->
 			<properties>
-				<cfg_upload.path>XXXX</cfg_upload.path>
+				<!-- jdbc配置信息 -->
+				<jdbc_url>jdbc:mysql://127.0.0.1:3306/test</jdbc_url>
+				<jdbc_user>root</jdbc_user>
+				<jdbc_password>123456</jdbc_password>
+				<jdbc_initialSize>100</jdbc_initialSize>
+				<jdbc_minIdle>100</jdbc_minIdle>
+				<jdbc_maxActive>1000</jdbc_maxActive>
+				<jdbc_maxWait>10000</jdbc_maxWait>
+				<jdbc_timeBetweenEvictionRunsMillis>60000</jdbc_timeBetweenEvictionRunsMillis>
+				<jdbc_minEvictableIdleTimeMillis>300000</jdbc_minEvictableIdleTimeMillis>
+				<jdbc_filters>stat,log4j,wall</jdbc_filters>
+				<!-- jdbc配置信息 -->
 			</properties>
 		</profile>
 	</profiles>

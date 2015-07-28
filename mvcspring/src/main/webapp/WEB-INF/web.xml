@@ -89,12 +89,12 @@
 		<init-param>
 			<!-- 用户名 -->
 			<param-name>loginUsername</param-name>
-			<param-value>druid</param-value>
+			<param-value>druidAdmin</param-value>
 		</init-param>
 		<init-param>
 			<!-- 密码 -->
 			<param-name>loginPassword</param-name>
-			<param-value>druid</param-value>
+			<param-value>druid123456</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
@@ -111,6 +111,11 @@
 	<!-- 表示当系统发生异常错误的时候，页面跳转到error.html页面。 -->
 	<error-page>
        <exception-type>java.lang.Exception</exception-type>
-       <location>/pages/error.jsp</location>
+       <location>/pages/common/error.jsp</location>
     </error-page>
+    <error-page>
+       <error-code>404</error-code>
+       <location>/pages/common/error.jsp</location>
+    </error-page> 
+    
 </web-app>
