@@ -15,7 +15,9 @@
 	<!-- 读取spring常量配置文件 -->
 	<context:property-placeholder location="classpath:Config.properties" />
 	<!-- 扫描service类 应用spring注解 -->
-	<context:component-scan base-package="com.lolaage" />
+	<context:component-scan base-package="com.lolaage.service" /> 
+	
 	<!-- 使用ehcache做缓存 <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"> 
 		<property name="configLocation" value="classpath:ehcache.xml" /> </bean> -->
+		
 </beans>

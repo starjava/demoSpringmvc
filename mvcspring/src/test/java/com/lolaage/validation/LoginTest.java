@@ -1,7 +1,5 @@
 package com.lolaage.validation;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -11,9 +9,14 @@ import javax.validation.ValidatorFactory;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.lolaage.entity.Login;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:spring.xml", "classpath:spring-mvc.xml", "classpath:spring-mybatis.xml"})
 public class LoginTest
 {
     private static Validator validator;
@@ -29,11 +32,14 @@ public class LoginTest
     public void manufacturerIsNull()
     {
         Login login = new Login();
-        login.setUsername("ada");
-        login.setPassword("1111111");
+        login.setUsername("adm");
+        login.setPassword("asd");
+        /* 将类型装载效验 */
         Set<ConstraintViolation<Login>> constraintViolations = validator.validate(login);
+        /* 将类型装载效验 */
         
-        assertEquals(1, constraintViolations.size());
-        assertEquals("may not be null", constraintViolations.iterator().next().getMessage());
+        for (ConstraintViolation<Login> constraintViolation : constraintViolations)
+            System.out.println("错误：" + constraintViolation.getMessage());
+        
     }
 }

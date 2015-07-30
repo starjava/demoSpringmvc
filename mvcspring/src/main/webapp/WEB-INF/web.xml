@@ -72,6 +72,12 @@
 			<param-name>profileEnable</param-name>
 			<param-value>true</param-value>
 		</init-param>
+		<!--  得druid能够知道当前的session的用户是谁,把其中的xxx.user修改为你user信息保存在session中的sessionName
+		<init-param>
+        <param-name>principalSessionName</param-name>
+        <param-value>xxx.user</param-value>
+    </init-param>
+     -->
 	</filter>
 	<filter-mapping>
 		<filter-name>DruidWebStatFilter</filter-name>
@@ -110,12 +116,12 @@
 	</session-config>
 	<!-- 表示当系统发生异常错误的时候，页面跳转到error.html页面。 -->
 	<error-page>
-       <exception-type>java.lang.Exception</exception-type>
-       <location>/pages/common/error.jsp</location>
-    </error-page>
-    <error-page>
-       <error-code>404</error-code>
-       <location>/pages/common/error.jsp</location>
-    </error-page> 
-    
+		<exception-type>java.lang.Exception</exception-type>
+		<location>/pages/common/error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/pages/common/error.jsp</location>
+	</error-page>
+
 </web-app>

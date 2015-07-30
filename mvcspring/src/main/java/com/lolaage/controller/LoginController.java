@@ -1,13 +1,13 @@
 package com.lolaage.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.lolaage.entity.Login;
@@ -30,29 +30,28 @@ public class LoginController
     private ILoginService loginService;
     
     @RequestMapping("/login")
-    public String login(@Valid @ModelAttribute Login loginVo, BindingResult result, ModelMap map)
+    public String login(HttpSession session, @Valid Login login, BindingResult result, ModelMap map)
     {
-        System.out.println(loginVo.toString());
-        if (result.hasErrors())
+        String rand = (String)session.getAttribute("rand");
+        rand = rand == null ? "" : rand;
+        System.out.println(login.toString());
+        if (result.hasErrors() || !rand.equals(login.getVcodetxt()))
         {
-            return "pages/Login/login";
+            return "Login/login";
         }
-        if (loginService.Login(loginVo.getUsername(), loginVo.getPassword()))
+        if (loginService.Login(login.getUsername(), login.getPassword()))
         {
-            log.info("success.." + loginVo.getUsername() + "-password:" + loginVo.getPassword());
-            log.debug("debug msg");
-            log.error("error msg");
-            map.put("name", loginVo.getUsername());
-            map.put("pass", loginVo.getPassword());
-            return "pages/main";
+            log.info("success.." + login.getUsername() + "-password:" + login.getPassword());
+            map.put("name", login.getUsername());
+            map.put("pass", login.getPassword());
+            return "main";
         }
         else
         {
             map.put("msg", "帐号或密码错误!!!");
             log.info("msg--帐号或密码错误!!!");
-            return "pages/Login/login";
+            return "Login/login";
         }
         
     }
-    
 }

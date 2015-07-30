@@ -7,14 +7,7 @@
 </head>
 <body>
 	<h2>Hello World! 404 pages !!!</h2>
-	<center>
-		User :${requestScope.u} Login Success!!!<br>
-		Password:${requestScope.p} 
-		<br> <br> 
-		${requestScope.success}
-		${sessionScope.rand}
-	</center>
 	跳转至上传页面:
-	<a href="#" onclick="javascript:history.go(-1);">上传页面</a>
+	<a href="#" onclick="javascript:history.go(-1);">返回上一页</a>
 </body>
 </html>
