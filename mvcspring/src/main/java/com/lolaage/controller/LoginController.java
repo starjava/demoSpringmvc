@@ -1,6 +1,7 @@
 package com.lolaage.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -30,15 +31,11 @@ public class LoginController
     private ILoginService loginService;
     
     @RequestMapping("/login")
-    public String login(HttpSession session, @Valid Login login, BindingResult result, ModelMap map)
+    public String login(HttpServletResponse response, HttpSession session, @Valid Login login, BindingResult result,
+        ModelMap map)
     {
         String rand = (String)session.getAttribute("rand");
         rand = rand == null ? "" : rand;
-        System.out.println(login.toString());
-        if (result.hasErrors() || !rand.equals(login.getVcodetxt()))
-        {
-            return "Login/login";
-        }
         if (loginService.Login(login.getUsername(), login.getPassword()))
         {
             log.info("success.." + login.getUsername() + "-password:" + login.getPassword());

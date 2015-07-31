@@ -39,7 +39,7 @@ public class LoginTest
         /* 将类型装载效验 */
         
         for (ConstraintViolation<Login> constraintViolation : constraintViolations)
-            System.out.println("错误：" + constraintViolation.getMessage());
+            System.out.println(constraintViolation.getPropertyPath() + "错误：" + constraintViolation.getMessage());
         
     }
 }
